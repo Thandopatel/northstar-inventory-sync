@@ -5,12 +5,10 @@ from sqlalchemy.orm import Session
 from backend import models, webhook, inventory
 from backend.database import engine, get_db
 
-# Create database tables
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Northstar Live Inventory Sync API")
 
-# Allow web browsers to connect to the backend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

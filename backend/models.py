@@ -1,11 +1,14 @@
-from sqlalchemy import Column, String, Integer, DateTime
-from datetime import datetime, timezone
-from database import Base
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from sqlalchemy.sql import func
+from backend.database import Base
 
-class ProductInventory(Base):
-    __tablename__ = "inventory"
 
-    sku = Column(String, primary_key=True, index=True)
+class InventoryItem(Base):
+    __tablename__ = "inventory_items"
+
+    id = Column(Integer, primary_key=True, index=True)
+    sku = Column(String, unique=True, index=True, nullable=False)
     product_name = Column(String, nullable=True)
-    quantity = Column(Integer, default=0)
-    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+    quantity = Column(Integer, default=0, nullable=False)
+    in_stock = Column(Boolean, default=True)
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now(), server_default=func.now())
