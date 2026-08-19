@@ -12,3 +12,4 @@ docs will be added as the sprint progresses (Days 1–5).
 - `frontend/` — support tool UI
 - `tests/` — test suite
 - `docs/` — Learning & Blocker Journal, Scope Delta Analysis, Architecture notes
+file:///C:/Users/Tshiamo.DESKTOP-F6QLIJV/Documents/northstar-inventory-sync/frontend/index.html
