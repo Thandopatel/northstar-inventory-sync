@@ -5,8 +5,8 @@
 > troubleshooting process, not a summary written after the fact.
 
 ## Tool assigned
-- **Tool/concept:** _( webhook verification, GraphQL, retry/backoff)_
-- **Prior familiarity:** _No knowledge _
+- **Tool/concept**Tool/concept:** Webhook verification
+- **Prior familiarity:**  _No prior knowledge
 - **Time-box:** _(4 hours for Days 1–2)_
 
 ## Log
