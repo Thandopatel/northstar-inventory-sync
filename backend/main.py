@@ -1,22 +1,36 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-import models, webhook, inventory
-from database import engine, get_db
 
+from backend import models, webhook, inventory
+from backend.database import engine, get_db
+
+# Create database tables
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Northstar Live Inventory Sync API")
 
-@app.get("/")
-def root():
-    return {"status": "ok", "service": "Northstar Inventory Sync"}
+# Allow web browsers to connect to the backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.post("/api/v1/webhooks/inventory", status_code=200)
-def handle_inventory_webhook(payload: webhook.InventoryWebhookPayload, db: Session = Depends(get_db)):
+@app.post("/api/v1/webhooks/inventory", response_model=webhook.WebhookResponse)
+def handle_inventory_webhook(
+    payload: webhook.InventoryWebhookPayload, 
+    db: Session = Depends(get_db)
+):
     updated_item = inventory.update_or_create_stock(db, payload)
-    return {"status": "success", "message": "Inventory updated", "data": {"sku": updated_item.sku, "quantity": updated_item.quantity}}
+    return webhook.WebhookResponse(
+        status="success",
+        message="Inventory updated successfully",
+        data={"sku": updated_item.sku, "quantity": updated_item.quantity}
+    )
 
 @app.get("/api/v1/stock/{sku}", response_model=webhook.StockCheckResponse)
-def get_stock_status(sku: str, db: Session = Depends(get_db)):
+def check_stock_level(sku: str, db: Session = Depends(get_db)):
     return inventory.check_stock(db, sku)
-# TODO: implement

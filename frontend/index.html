@@ -1,1 +1,51 @@
-<!-- TODO: build support tool UI -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northstar Inventory Sync</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Northstar Inventory Dashboard</h1>
+
+    <!-- FORM 1: SEND WEBHOOK -->
+    <div class="card">
+      <h2>1. Send Inventory Webhook</h2>
+      <form id="webhookForm">
+        <div class="form-group">
+          <label for="webhookSku">SKU</label>
+          <input type="text" id="webhookSku" value="NS-101" required>
+        </div>
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input type="text" id="productName" value="Winter Jacket">
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" value="15" required>
+        </div>
+        <button type="submit">Update Stock</button>
+      </form>
+      <div id="webhookResult" class="result" style="display: none;"></div>
+    </div>
+
+    <!-- FORM 2: CHECK STOCK -->
+    <div class="card">
+      <h2>2. Check Stock Status</h2>
+      <form id="stockForm">
+        <div class="form-group">
+          <label for="checkSku">SKU to Search</label>
+          <input type="text" id="checkSku" value="NS-101" required>
+        </div>
+        <button type="submit">Check Availability</button>
+      </form>
+      <div id="stockResult" class="result" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
