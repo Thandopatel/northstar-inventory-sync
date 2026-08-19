@@ -14,7 +14,7 @@ Add one entry per blocker or learning moment, in the order they happened.
 
 ### Entry 1
 - **Time:**
-- **What I was trying to do:**
+- **What 
 - **What broke / what I didn't understand:**
 - **What I tried:**
 - **Outcome:**
