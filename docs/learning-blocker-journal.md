@@ -46,7 +46,7 @@ Entry 5
 - **Outcome:**Identified that running Uvicorn from the root folder requires consistent absolute package imports (from backend import ...). Fixed all relative import paths in models.py (from backend.database import Base) and inventory.py, and added missing response models (WebhookResponse, StockCheckResponse) to webhook.py. The server started successfully on [http://127.0.0.1:8000](http://127.0.0.1:8000).
 <!-- Add more entries as needed -->I should have broken down this task in a matter of two days however due to personal reasons i had to do all of this work on one day.
 
-Entry 5
+Entry 6
 - **Time:**19 August 2026, 6:35 PM
 - **What I was trying to do:** Connect the HTML/JS frontend dashboard to the FastAPI backend and view the live working prototype in the browser.
 - **What broke / what I didn't understand:**Opening index.html directly via the file system (file:///...) blocked API fetch calls to the backend running on [http://127.0.0.1:8000](http://127.0.0.1:8000) due to CORS rules and browser security restrictions.
