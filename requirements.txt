@@ -1,4 +1,6 @@
-fastapi
-uvicorn
-sqlalchemy
-pydantic
+fastapi==0.104.1
+uvicorn==0.24.0
+sqlalchemy==2.0.23
+httpx==0.25.1
+pytest==7.4.3
+pytest-asyncio==0.21.1
