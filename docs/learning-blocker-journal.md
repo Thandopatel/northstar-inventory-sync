@@ -56,4 +56,128 @@ Entry 6
 - **Planned:**4 hours across Days 1–2.
 - **Actual:**Approximately 4 hours of active work, with additional time spent thinking through the architecture and troubleshooting.
 - **Reflection:**The biggest lesson for me was that I should not expect to understand a completely unfamiliar technical concept immediately. I initially wanted to get straight to the code, but I realised that I needed to understand the flow first. I also learned that getting stuck is part of the process, as long as I record what I tried and what I learned from it. The exercise made me more comfortable with troubleshooting independently rather than immediately asking someone else for the answer. I still need to improve my confidence with backend development and webhook implementation, but I now have a better understanding of how the concept connects to the Northstar inventory-sync requirement.
+Day 3
+**Entry 7**
+**What I was trying to do:**
+Implement the original Day 3 polling specification:
+
+Build a background poller that fetches inventory from a warehouse API every 5 minutes
+
+Create a mock warehouse client (since there's no real API to test against)
+
+Cache the stock data in a shared database
+
+Expose a GET /api/v1/stock query endpoint
+
+Make sure the poller and existing webhook both write to the same cache
+
+Write tests to verify everything works
+**What broke/What i didnt understand**
+Problem 1: Python command not found
+
+When I tried to run python --version, I got "python was not found"
+
+I didn't understand why Python wasn't recognized even though it was installed
+
+Problem 2: Uvicorn not recognized
+
+After creating all files, uvicorn command wasn't found
+
+I didn't understand the difference between python and py on Windows
+
+Problem 3: SQLAlchemy compatibility with Python 3.14
+
+I got an error: AssertionError: Class <class 'sqlalchemy.sql.elements.SQLCoreOperations'> directly inherits TypingOnly...
+
+I didn't understand that Python 3.14 is brand new and some packages aren't fully compatible yet
+
+Problem 4: Import errors
+
+ImportError: cannot import name 'sync_stock_item' from 'backend.inventory'
+
+ImportError: cannot import name 'get_db_connection' from 'backend.database'
+
+I didn't realize my files were empty or missing the required functions
+
+Problem 5: Folder structure confusion
+
+I had multiple inventory.py and database.py files in different folders
+
+I wasn't sure which files were being used
+**What i tried**
+Fix 1: Used py instead of python
+
+Found out py is the Python launcher on Windows
+
+Used py --version and it worked!
+
+Installed packages with py -m pip install
+
+Fix 2: Updated SQLAlchemy
+
+Ran py -m pip install --upgrade sqlalchemy
+
+Upgraded from version 2.0.52 to 2.0.35 (downgraded to a stable version)
+
+Fix 3: Wrote the missing functions
+
+Added sync_stock_item() to inventory.py
+
+Added get_db_connection() to database.py
+
+Made sure each file had the correct code
+
+Fix 4: Created __init__.py
+
+Added __init__.py in the backend folder to make it a Python package
+
+This fixed the import issues
+
+Fix 5: Cleaned up the folder structure
+
+Made sure the correct database.py was in the backend folder
+
+Deleted duplicate files in wrong locations
+
+Fix 6: Wrote comprehensive tests
+
+Created tests/test_api_client.py with 7 tests
+
+Ran py -m pytest tests/ -v to verify everything
+
+Got 7 passed tests (with 203 deprecat
+**Outcome**
+What I achieved:
+
+Poller runs every 5 minutes - Successfully polls the mock warehouse
+
+Inventory is cached in SQLite - Data is stored in inventory.db
+
+Query endpoint works - GET /api/v1/stock returns all cached inventory
+
+Manual poll trigger - POST /api/v1/poll-now forces an immediate poll
+
+All 7 tests pass - Proves the API client works correctly
+
+Shared cache - Both webhook and poller use the same sync_stock_item() function
+**Planned:** 2hour
+- **Actual:**1.49 
+- **Reflection:** The biggest lesson for me today was that technical problems often have simple solutions once you understand what's actually going wrong. When I got errors like "python was not found" or "cannot import name," I initially felt stuck and frustrated. But by breaking each problem down, trying different solutions, and asking for help when needed, I was able to solve every issue.
+
+I learned several practical things today:
+
+On Windows, use py instead of python - This simple fix solved most of my command issues
+
+Python 3.14 is brand new - Some packages (like SQLAlchemy) need updates or downgrades to work properly
+
+__init__.py files matter - They tell Python that a folder is a package that can be imported
+
+VS Code's Problems tab is helpful - It showed me exactly which functions were missing
+
+Tests give confidence - Seeing "7 passed" was reassuring and proved my code actually works
+
+The exercise made me more comfortable with troubleshooting independently. Instead of immediately asking for help, I started reading error messages more carefully, checking my files, and trying logical solutions. I still need to improve my confidence with backend development, but I now have a much better understanding of how the poller, warehouse client, and cache work together.
+
+I was surprised by how many small things could break (Python path issues, missing functions, import errors), but I learned that each error teaches you something valuable. The process of getting stuck, trying things, and eventually solving the problem is actually how you learn best.
+
 
