@@ -56,6 +56,7 @@ Entry 6
 - **Planned:**4 hours across Days 1–2.
 - **Actual:**Approximately 4 hours of active work, with additional time spent thinking through the architecture and troubleshooting.
 - **Reflection:**The biggest lesson for me was that I should not expect to understand a completely unfamiliar technical concept immediately. I initially wanted to get straight to the code, but I realised that I needed to understand the flow first. I also learned that getting stuck is part of the process, as long as I record what I tried and what I learned from it. The exercise made me more comfortable with troubleshooting independently rather than immediately asking someone else for the answer. I still need to improve my confidence with backend development and webhook implementation, but I now have a better understanding of how the concept connects to the Northstar inventory-sync requirement.
+
 Day 3
 **Entry 7**
 **What I was trying to do:**
