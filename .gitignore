@@ -1,6 +1,5 @@
-__pycache__/
-*.pyc
-.env
-venv/
-.DS_Store
-node_modules/
+echo "*.db" >> .gitignore
+echo "__pycache__/" >> .gitignore
+git add .gitignore
+git commit -m "Add .gitignore"
+git push origin main
