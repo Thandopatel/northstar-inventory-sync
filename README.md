@@ -44,3 +44,4 @@ support tool queries current stock via `GET /api/v1/stock/{sku}`.
 See `docs/scope-delta-analysis.md` for how this compares to the original
 polling-based spec, and `docs/learning-blocker-journal.md` for the
 real-time log of how this was built.
+Link:https://dependable-swift-volume--patelthando0.replit.app/
